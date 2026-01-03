@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waalid - Keajaiban Aroma Mewah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #b8941f;
+            --deep-burgundy: #2c1a1a;
+            --cream: #f8f4e9;
+            --dark-charcoal: #1a1a1a;
+            --light-gold: #f4e8c1;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2c1a1a 100%);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        .luxury-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .elegant-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .luxury-border {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--deep-burgundy), var(--gold), var(--deep-burgundy)) border-box;
+            border-image: linear-gradient(45deg, var(--gold), var(--dark-gold), var(--gold)) 1;
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pulse-gold {
+            animation: pulse-gold 2s infinite;
+        }
+
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--gold);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--gold); }
+        }
+
+        .perfume-bottle {
+            perspective: 1000px;
+            transition: transform 0.5s ease;
+        }
+
+        .perfume-bottle:hover {
+            transform: rotateY(20deg) scale(1.05);
+        }
+
+        .sparkle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator"></div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="w-20 h-20 border-4 border-transparent border-t-gold rounded-full animate-spin mb-4"></div>
+        <div class="luxury-font text-2xl gold-gradient">Waalid</div>
+        <div class="elegant-font text-cream mt-2">Loading Luxury Experience...</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 glass-effect py-4 px-8 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="luxury-font text-2xl gold-gradient">Waalid</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-cream hover:text-gold transition-colors duration-300 elegant-font">Home</a>
+                <a href="#about" class="text-cream hover:text-gold transition-colors duration-300 elegant-font">Tentang</a>
+                <a href="#keunggulan" class="text-cream hover:text-gold transition-colors duration-300 elegant-font">keunggulan</a>
+                <a href="#collections" class="text-cream hover:text-gold transition-colors duration-300 elegant-font">koleksi</a>
+                <a href="#pesanan" class="text-cream hover:text-gold transition-colors duration-300 elegant-font">pesan</a>
+            </div>
+            <button class="md:hidden text-cream">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 parallax" style="background-image: url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="luxury-font text-5xl md:text-7xl lg:text-8xl mb-6 gold-gradient typewriter">
+                Temukan Keajaiban Aroma Mewah
+            </h1>
+            <p class="elegant-font text-xl md:text-2xl text-cream mb-8 fade-in">
+                Di Waalid, kami menciptakan mahakarya aroma yang mengubah setiap momen menjadi kenangan tak terlupakan.
+            </p>
+            <button class="luxury-border px-8 py-4 text-lg font-semibold text-cream hover:bg-gold hover:text-dark-charcoal transition-all duration-300 transform hover:scale-105 pulse-gold shine-effect">
+                <span class="gold-gradient">JELAJAHI KOLEKSI</span>
+            </button>
+        </div>
+
+        <!-- Floating elements -->
+        <div class="absolute top-20 left-10 w-4 h-4 bg-gold rounded-full floating sparkle"></div>
+        <div class="absolute top-1/3 right-20 w-6 h-6 bg-gold rounded-full floating sparkle" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-20 w-3 h-3 bg-gold rounded-full floating sparkle" style="animation-delay: 2s;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 relative">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="luxury-font text-4xl md:text-5xl text-center gold-gradient mb-16 fade-in">
+                Parfum Eksklusif untuk Jiwa yang Berkelas
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <p class="elegant-font text-lg md:text-xl text-cream mb-6 leading-relaxed">
+                        Setiap botol parfum kami adalah hasil perpaduan sempurna antara seni dan sains, diracik dari bahan-bahan langka dan mewah yang hanya bisa ditemukan di sudut dunia paling eksotis.
+                    </p>
+                    <p class="elegant-font text-lg md:text-xl text-cream mb-8 leading-relaxed">
+                        Dari bunga-bunga yang mekar di taman rahasia Prancis, hingga rempah-rempah hangat dari Timur Tengah, setiap tetesnya membawa cerita dan keanggunan yang tak tertandingi.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="text-center">
+                            <div class="luxury-font text-3xl gold-gradient">100%</div>
+                            <div class="elegant-font text-cream">Bahan Alami</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="luxury-font text-3xl gold-gradient">24+</div>
+                            <div class="elegant-font text-cream">Jam Penyulingan</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="luxury-font text-3xl gold-gradient">5</div>
+                            <div class="elegant-font text-cream">Benua Sumber</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative fade-in">
+                    <div class="perfume-bottle luxury-border p-8 rounded-lg glass-effect">
+                        <img src="https://placehold.co/600x800" alt="Botol parfum Waalid premium dengan desain kristal berkilau dan cap emas" class="w-full h-auto rounded-lg transform hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-8 h-8 bg-gold rounded-full pulse-gold"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="keunggulan" class="py-20 px-4 bg-black bg-opacity-50 relative">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="luxury-font text-4xl md:text-5xl text-center gold-gradient mb-16 fade-in">
+                Keunggulan Waalid
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Cards -->
+                <div class="glass-effect p-8 rounded-lg hover:transform hover:scale-105 transition-all duration-300 fade-in">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-crown text-4xl gold-gradient mb-4"></i>
+                        <h3 class="luxury-font text-xl gold-gradient mb-4">Eksklusivitas Tanpa Tanding</h3>
+                        <p class="elegant-font text-cream">Produksi terbatas dengan bahan premium, simbol status untuk segelintir orang terpilih.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-lg hover:transform hover:scale-105 transition-all duration-300 fade-in">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-gem text-4xl gold-gradient mb-4"></i>
+                        <h3 class="luxury-font text-xl gold-gradient mb-4">Desain Botol Memukau</h3>
+                        <p class="elegant-font text-cream">Karya seni yang mempercantik meja rias dan menjadi koleksi membanggakan.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-effect p-8 rounded-lg hover:transform hover:scale-105 transition-all duration-300 fade-in">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-user-cog text-4xl gold-gradient mb-4"></i>
+                        <h3 class="luxury-font text-xl gold-gradient mb-4">Personalisasi Aroma</h3>
+                        <p class="elegant-font text-cream">Tim ahli siap menciptakan aroma personal yang mencerminkan jiwa Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="py-20 px-4 relative">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="luxury-font text-4xl md:text-5xl text-center gold-gradient mb-16 fade-in">
+                Koleksi Eksklusif
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Collection Items -->
+                <div class="group relative overflow-hidden rounded-lg luxury-border fade-in">
+                    <img src="https://placehold.co/400x500" alt="Signature Masterpieces - botol kristal dengan aroma ikonik Waalid" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center">
+                            <h3 class="luxury-font text-xl gold-gradient mb-2">Signature Masterpieces</h3>
+                            <p class="elegant-font text-cream">Aroma ikonik yang memikat hati</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-lg luxury-border fade-in">
+                    <img src="https://placehold.co/400x500" alt="Limited Edition Rarities - parfum langka dengan kemasan eksklusif" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center">
+                            <h3 class="luxury-font text-xl gold-gradient mb-2">Limited Edition</h3>
+                            <p class="elegant-font text-cream">Parfum langka komposisi unik</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-lg luxury-border fade-in">
+                    <img src="https://placehold.co/400x500" alt="Unisex Elegance - aroma melampaui batas gender dengan elegan" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center">
+                            <h3 class="luxury-font text-xl gold-gradient mb-2">Unisex Elegance</h3>
+                            <p class="elegant-font text-cream">Aroma melampaui batas gender</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-lg luxury-border fade-in">
+                    <img src="https://placehold.co/400x500" alt="Gift of Luxury - paket hadiah mewah dengan pita emas" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div class="text-center">
+                            <h3 class="luxury-font text-xl gold-gradient mb-2">Gift of Luxury</h3>
+                            <p class="elegant-font text-cream">Paket hadiah mewah sempurna</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="pesanan" class="py-20 px-4 relative parallax" style="background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=2000&q=80');">
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+        <div class="relative z-10 container mx-auto max-w-4xl text-center">
+            <h2 class="luxury-font text-4xl md:text-5xl gold-gradient mb-8 fade-in">
+                Jadikan Aroma Anda Sebagai Tanda Tangan Pribadi
+            </h2>
+            <p class="elegant-font text-xl text-cream mb-12 fade-in">
+                Dengan Waalid, Anda tidak hanya memakai parfum, Anda mengenakan keanggunan, kemewahan, dan cerita yang hanya Anda miliki.
+            </p>
+            <button class="luxury-border px-12 py-6 text-xl font-semibold text-cream hover:bg-gold hover:text-dark-charcoal transition-all duration-300 transform hover:scale-105 pulse-gold shine-effect fade-in">
+                <a href="https://wa.me/082130871950" class="gold-gradient">PESAN SEKARANG</a>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 glass-effect">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="luxury-font text-2xl gold-gradient mb-4">Waalid</div>
+                    <p class="elegant-font text-cream">Keajaiban Aroma Mewah yang Membawa Kenangan</p>
+                </div>
+                
+                <div>
+                    <h4 class="luxury-font text-lg gold-gradient mb-4">Tautan Cepat</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="elegant-font text-cream hover:text-gold transition-colors">Tentang Kami</a></li>
+                        <li><a href="#" class="elegant-font text-cream hover:text-gold transition-colors">Koleksi</a></li>
+                        <li><a href="#" class="elegant-font text-cream hover:text-gold transition-colors">Blog</a></li>
+                        <li><a href="#" class="elegant-font text-cream hover:text-gold transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="luxury-font text-lg gold-gradient mb-4">Hubungi Kami</h4>
+                    <p class="elegant-font text-cream">info@waalid.com</p>
+                    <p class="elegant-font text-cream">+62 21 1234 5678</p>
+                </div>
+                
+                <div>
+                    <h4 class="luxury-font text-lg gold-gradient mb-4">Ikuti Kami</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://instagram.com/musyafa3is" class="text-cream hover:text-gold transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-cream hover:text-gold transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-cream hover:text-gold transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-cream hover:text-gold transition-colors"><i class="fab fa-pinterest text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gold border-opacity-30 mt-8 pt-8 text-center">
+                <p class="elegant-font text-cream">&copy; 2024 Waalid Parfum. Semua hak cipta dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading screen after 2 seconds
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                }, 1000);
+            }, 2000);
+
+            // Scroll animation
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Scroll indicator
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.querySelector('.scroll-indicator').style.width = scrollPercent + '%';
+            });
+
+            // Navigation scroll
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Parallax effect
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                const parallaxElements = document.querySelectorAll('.parallax');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    element.style.backgroundPositionY = -(scrolled * speed) + 'px';
+                });
+            });
+
+            // Create sparkles
+            function createSparkles() {
+                const container = document.body;
+                for (let i = 0; i < 20; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    sparkle.style.width = Math.random() * 4 + 2 + 'px';
+                    sparkle.style.height = sparkle.style.width;
+                    sparkle.style.animationDelay = Math.random() * 2 + 's';
+                    sparkle.style.animationDuration = Math.random() * 2 + 1 + 's';
+                    container.appendChild(sparkle);
+                }
+            }
+
+            createSparkles();
+
+            // Hover effects for buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'scale(1.05) rotate(2deg)';
+                });
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Typewriter effect restart
+            setTimeout(() => {
+                const typewriter = document.querySelector('.typewriter');
+                typewriter.style.animation = 'none';
+                setTimeout(() => {
+                    typewriter.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite';
+                }, 50);
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
